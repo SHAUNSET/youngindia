@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trained for Exams, Unprepared for Life | Young India</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FF6B6B;
+            --secondary-color: #4ECDC4;
+            --accent-color: #FFD166;
+            --dark-bg: #0F0F1E;
+            --dark-card: #1A1A2E;
+            --light-bg: #F8F9FA;
+            --light-card: #FFFFFF;
+            --text-dark: #212529;
+            --text-light: #E9ECEF;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            transition: var(--transition);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: linear-gradient(to right, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9));
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode header {
+            background: linear-gradient(to right, rgba(26, 26, 46, 0.9), rgba(15, 15, 30, 0.9));
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--accent-color), var(--primary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: white;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(180deg);
+        }
+
+        /* Article Layout */
+        .article-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background-color: var(--light-card);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .sidebar {
+            background-color: var(--dark-card);
+        }
+
+        .sidebar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .sidebar-nav {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 10px 12px;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .sidebar-nav a {
+            color: var(--text-light);
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .sidebar-nav a:hover,
+        body.dark-mode .sidebar-nav a.active {
+            background-color: rgba(255, 107, 107, 0.2);
+        }
+
+        /* Mobile Section Navigation */
+        .mobile-section-nav {
+            display: none;
+            background-color: var(--light-card);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .mobile-section-nav {
+            background-color: var(--dark-card);
+        }
+
+        .mobile-section-nav-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .mobile-section-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 5px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mobile-section-tabs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .mobile-section-tabs::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+        }
+
+        .mobile-section-tabs::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .mobile-section-tab {
+            flex-shrink: 0;
+            padding: 8px 15px;
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--text-dark);
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .mobile-section-tab {
+            color: var(--text-light);
+        }
+
+        .mobile-section-tab.active,
+        .mobile-section-tab:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Article Container */
+        .article-container {
+            flex: 1;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Article Header */
+        .article-header {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .article-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+        }
+
+        .article-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            color: var(--text-dark);
+            opacity: 0.7;
+            flex-wrap: wrap;
+        }
+
+        body.dark-mode .article-meta {
+            color: var(--text-light);
+        }
+
+        .article-author {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Featured Image */
+        .featured-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(78, 205, 196, 0.8));
+            border-radius: 15px;
+            margin: 25px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .featured-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://picsum.photos/seed/education/800/400.jpg') center/cover;
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .featured-image i {
+            font-size: 4rem;
+            color: white;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        /* Article Content */
+        .article-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .article-section {
+            margin-bottom: 25px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .article-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+        }
+
+        .article-section p {
+            margin-bottom: 12px;
+        }
+
+        .highlight {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: rgba(255, 107, 107, 0.3);
+            border-radius: 3px;
+        }
+
+        body.dark-mode .highlight {
+            color: var(--secondary-color);
+        }
+
+        body.dark-mode .highlight::after {
+            background-color: rgba(78, 205, 196, 0.3);
+        }
+
+        .bold {
+            font-weight: 600;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body.dark-mode .quote-section {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.5), rgba(15, 15, 30, 0.5));
+        }
+
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 8rem;
+            color: rgba(255, 107, 107, 0.2);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.5;
+            position: relative;
+            z-index: 1;
+            color: var(--text-dark);
+        }
+
+        body.dark-mode .quote-text {
+            color: var(--text-light);
+        }
+
+        /* Comments Section */
+        .comments-section {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: var(--light-card);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        body.dark-mode .comments-section {
+            background-color: var(--dark-card);
+        }
+
+        .comments-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        body.dark-mode .comments-title {
+            color: var(--text-light);
+        }
+
+        .comment-form {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        body.dark-mode .form-group label {
+            color: var(--text-light);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.05);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.3);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Footer */
+        footer {
+            padding: 25px 5%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .article-wrapper {
+                flex-direction: column;
+            }
+           
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+           
+            .sidebar-nav {
+                display: none;
+            }
+           
+            .mobile-section-nav {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: linear-gradient(to right, rgba(255, 107, 107, 0.95), rgba(78, 205, 196, 0.95));
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+            }
+
+            .article-wrapper {
+                padding: 0 15px;
+                margin-top: 80px;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-title::after {
+                width: 60px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .featured-image {
+                height: 180px;
+            }
+
+            .featured-image i {
+                font-size: 3rem;
+            }
+
+            .quote-text {
+                font-size: 1.1rem;
+            }
+
+            .quote-section {
+                padding: 20px;
+            }
+
+            .quote-section::before {
+                font-size: 6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 12px 4%;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .logo i {
+                font-size: 1.5rem;
+            }
+
+            .article-wrapper {
+                padding: 0 10px;
+                margin-top: 70px;
+            }
+
+            .article-title {
+                font-size: 1.8rem;
+            }
+
+            .article-meta {
+                font-size: 0.85rem;
+            }
+
+            .article-content {
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+            }
+
+            .featured-image {
+                height: 150px;
+                margin: 20px 0;
+            }
+
+            .quote-text {
+                font-size: 1rem;
+            }
+
+            .comments-section {
+                padding: 20px;
+            }
+
+            .mobile-section-tab {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fas fa-feather-alt"></i>
+            YOUNG INDIA
+        </a>
+        <nav>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#posts">Posts</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Article Wrapper -->
+    <div class="article-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">Article Sections</h3>
+            <ul class="sidebar-nav">
+                <li><a href="#trained-not-educated" class="nav-link active">Trained, Not Educated</a></li>
+                <li><a href="#routine-we-are-used-to" class="nav-link">The Everyday Routine</a></li>
+                <li><a href="#when-reality-finally-hits" class="nav-link">When Reality Finally Hits Us</a></li>
+                <li><a href="#the-funny-part" class="nav-link">The Funny Part</a></li>
+                <li><a href="#why-reform-is-a-must" class="nav-link">Why Reform Is a Must</a></li>
+                <li><a href="#inference" class="nav-link">Inference</a></li>
+            </ul>
+        </aside>
+
+        <!-- Article Container -->
+        <div class="article-container">
+            <!-- Mobile Section Navigation -->
+            <div class="mobile-section-nav">
+                <h3 class="mobile-section-nav-title">Jump to Section</h3>
+                <div class="mobile-section-tabs">
+                    <a href="#trained-not-educated" class="mobile-section-tab active">Trained, Not Educated</a>
+                    <a href="#routine-we-are-used-to" class="mobile-section-tab">The Routine</a>
+                    <a href="#when-reality-finally-hits" class="mobile-section-tab">Reality Hits</a>
+                    <a href="#the-funny-part" class="mobile-section-tab">The Funny Part</a>
+                    <a href="#why-reform-is-a-must" class="mobile-section-tab">Why Reform</a>
+                    <a href="#inference" class="mobile-section-tab">Inference</a>
+                </div>
+            </div>
+
+            <!-- Article Header -->
+            <div class="article-header">
+                <h1 class="article-title">TRAINED FOR EXAMS, UNPREPARED FOR LIFE</h1>
+                <div class="article-meta">
+                    <div class="article-author">
+                        <i class="fas fa-user"></i>
+                        BY SHAUNAK NAIK – YOUNG INDIA
+                    </div>
+                    <div class="article-date">
+                        <i class="fas fa-calendar"></i>
+                        DECEMBER 11, 2025
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Image -->
+            <div class="featured-image">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+
+            <!-- Article Content -->
+            <div class="article-content">
+                <!-- Section 1: Trained, Not Educated -->
+                <div class="article-section" id="trained-not-educated">
+                    <h2 class="section-title">TRAINED, NOT EDUCATED</h2>
+                    <p>Yesterday, I was sitting at my desk preparing for my university exams — notebook open, notes everywhere, ChatGPT doing its work — when a thought hit me out of nowhere:</p>
+                    <br>
+                    <p>Is this what education is really supposed to be?</p>
+                    <p>Because if I'm being honest…</p>
+                    <p><span class="highlight">there's no deep learning happening</span>,</p>
+                    <p><span class="highlight">no curiosity pushing me forward,</span></p>
+                    <p><span class="highlight">no real understanding being built.</span></p>
+                    <br>
+                    <p>I'm just surviving.</p>
+                    <p>Surviving the pressure.</p>
+                    <p>Surviving the expectations.</p>
+                    <p>Surviving this never-ending academic load.</p>
+                    <br>
+                    <p>And that's when I realised — <span class="highlight">maybe the problem isn't us.</span></p>
+                    <p>Maybe it's the system we're trapped in.</p>
+                </div>
+
+                <!-- Section 2: The Routine We Are Used to -->
+                <div class="article-section" id="routine-we-are-used-to">
+                    <h2 class="section-title">THE ROUTINE WE ARE USED TO</h2>
+                    <p>Every student in India, no matter the stream, city, or college, ends up living the same routine.</p>
+                    <br>
+                    <p>Wake up tired.</p>
+                    <p>Sit in a class where half the room is lost in their own world, and the other half is pretending to listen.</p>
+                    <p>A place where <span class="highlight">attendance matters more than attention</span>.</p>
+                    <p>Then we come back home and study the same material again… simply because it didn't make sense the first time.</p>
+                    <br>
+                    <p>And honestly, it's not because teachers don't try.</p>
+                    <p>Most genuinely care. Many go out of their way to explain, guide, and support us.</p>
+                    <br>
+                    <p>The real problem is the system they're stuck in — a system that <span class="highlight">prioritizes portions and marks over real understanding</span>.</p>
+                    <br>
+                    <p>So students end up memorising instead of exploring subjects that are actually fascinating.</p>
+                    <p>Teachers end up rushing instead of teaching the way they wish they could.</p>
+                    <p>And all of us land in the same loop none of us created.</p>
+                </div>
+
+                <!-- Section 3: When Reality Finally Hits Us -->
+                <div class="article-section" id="when-reality-finally-hits">
+                    <h2 class="section-title">WHEN REALITY FINALLY HITS US</h2>
+                    <p>Then one day, a moment arrives — a project, an interview, a viva, a real-life task — where all your formulas and all your "theoretical knowledge" suddenly fail to make ends meet.</p>
+                    <br>
+                    <p>It could be something as simple as:</p>
+                    <p>• writing a letter of absence or leave to your college Principal.</p>
+                    <p>• explaining your ideas clearly to a peer group.</p>
+                    <p>• solving a real problem without a textbook.</p>
+                    <p>• working in a team.</p>
+                    <p>• or thinking on your own in a moment of crisis.</p>
+                    <br>
+                    <p>And that's when it hits you:</p>
+                    <p><span class="highlight">We memorised everything except the things life actually needs from us.</span></p>
+                    <br>
+                    <p>You're not dumb neither lazy nor unprepared.</p>
+                    <p>You were simply trained for exams — not for reality.</p>
+                    <br>
+                    <p>That's the moment you finally see the gap…</p>
+                    <p><span class="highlight">the gap between what the education system gives</span></p>
+                    <p><span class="highlight">and what the real world expects.</span></p>
+                </div>
+
+                <!-- Section 4: The Funny Part -->
+                <div class="article-section" id="the-funny-part">
+                    <h2 class="section-title">THE FUNNY PART</h2>
+                    <p>You know what's actually funny?</p>
+                    <p>Most of us are learning everything outside the education system.</p>
+                    <br>
+                    <p>We learn concepts, coding, and skills from YouTube.</p>
+                    <p>We learn money basics from random reels.</p>
+                    <p>We learn English from Netflix.</p>
+                    <p>We learn problem-solving by simply trying things on our own.</p>
+                    <br>
+                    <p><span class="highlight">Half the useful stuff didn't come from textbooks — it came from the internet, friends, seniors, experiences, and mistakes.</span></p>
+                    <br>
+                    <p>We didn't stop. We kept moving forward…</p>
+                    <p><span class="highlight">while the system stayed exactly the same.</span></p>
+                </div>
+
+                <!-- Section 5: Why Reform Is a Must -->
+                <div class="article-section" id="why-reform-is-a-must">
+                    <h2 class="section-title">WHY REFORM IS A MUST</h2>
+                    <p>The existing system is built for marks, exams, and portions — not real-world skills.</p>
+                    <br>
+                    <p>Meanwhile, students like us figure things out on our own… but millions of others don't get that chance.</p>
+                    <p>Talented kids end up memorizing instead of exploring.</p>
+                    <p>Their potential gets wasted because the system can't adjust to individual needs.</p>
+                    <br>
+                    <p><span class="highlight">Reform isn't optional anymore — it's a necessity.</span></p>
+                    <br>
+                    <p>We need a system where :</p>
+                    <p>a) <span class="bold">Race is not for finishing chapters but instead working on where those chapters can be actually applied…working on real stuff…like umm using physics for solving a water issue , or using mathematics to calculate the market, or making peers speak to each other in the same language taught in a language class instead of making them mug up grammar.</span></p>
+                    <p>b) <span class="bold">Exams? Maybe we can start putting more weights on grades for a group project , how a particular person handles a crisis or just how you present yourself.</span></p>
+                    <p>c) <span class="bold">Teach us something we actually use. Like how to file taxes , how to write professional emails in 2025 not letters which were written ages ago , how to manage stress and how to present yourself confidently.</span></p>
+                    <p>d) <span class="bold">Let us explore, give us real world exposure, give time to build things on our own, even fail instead of memorizing formulae, and writing lab experiments which are ultimately going to go in scrap.</span></p>
+                    <br>
+                    <p>We need a system that values understanding over marks, hands-on learning over memorization, and encourages curiosity instead of turning students into robots.</p>
+                    <br>
+                    <p>Because the world outside doesn't care if you memorized the textbook.</p>
+                    <p><span class="highlight">It cares if you can solve real problems.</span></p>
+                </div>
+
+                <!-- Section 6: Inference -->
+                <div class="article-section" id="inference">
+                    <h2 class="section-title">INFERENCE</h2>
+                    <p>We don't need an education system that produces toppers.</p>
+                    <p><span class="highlight">We need one that produces thinkers.</span></p>
+                    <br>
+                    <p>We don't need to memorize answers to pass exams.</p>
+                    <p><span class="highlight">We need to understand, explore, fail, learn, and try again.</span></p>
+                    <br>
+                    <p>The change has already started — teens building projects, students in hostels working on startups, young people learning finance, and students speaking up about issues… just like I am right now.</p>
+                    <p>But it can't stop there.</p>
+                    <br>
+                    <p>We need a system that catches up.</p>
+                    <p>A system that provides REAL EDUCATION.</p>
+                    <br>
+                    <p>Because at the end of the day,</p>
+                    <p><span class="highlight">marks are temporary.</span></p>
+                    <p><span class="highlight">Learning is forever.</span></p>
+                </div>
+
+                <!-- Quote Section -->
+                <div class="quote-section">
+                    <p class="quote-text">"We want that education by which character is formed, strength of mind is increased, and the intellect is expanded." — Swami Vivekananda</p>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <h2 class="comments-title">Share Your Thoughts</h2>
+               
+                <div class="comment-form">
+                    <form id="comment-form">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="comment">Your Comment</label>
+                            <textarea id="comment" class="form-control" required></textarea>
+                        </div>
+                       
+                        <button type="submit" class="submit-btn">Post Comment</button>
+                    </form>
+                </div>
+               
+                <div class="comments-list" id="comments-list">
+                    <!-- Comments will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Young India. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+       
+        mobileMenuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileMenuToggle.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+       
+        // Close menu when clicking on a link
+        document.querySelectorAll('#nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            });
+        });
+       
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+       
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+       
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+           
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+       
+        // Sidebar Navigation Active State (Desktop)
+        const sections = document.querySelectorAll('.article-section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileTabs = document.querySelectorAll('.mobile-section-tab');
+       
+        window.addEventListener('scroll', () => {
+            let current = '';
+           
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+               
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+           
+            // Update desktop sidebar
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+           
+            // Update mobile tabs
+            mobileTabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.getAttribute('href').substring(1) === current) {
+                    tab.classList.add('active');
+                }
+            });
+        });
+       
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link, .mobile-section-tab').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+               
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+               
+                const offset = window.innerWidth <= 768 ? 80 : 100;
+                window.scrollTo({
+                    top: targetSection.offsetTop - offset,
+                    behavior: 'smooth'
+                });
+            });
+        });
+       
+        // Back to Top Button
+        const backToTop = document.getElementById('back-to-top');
+       
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+       
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+       
+        // Comment Form Submission
+        document.getElementById('comment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+           
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const comment = document.getElementById('comment').value;
+           
+            // Create comment element
+            const commentElement = document.createElement('div');
+            commentElement.className = 'comment';
+           
+            // Get current date
+            const now = new Date();
+            const dateString = now.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+           
+            // Set comment HTML
+            commentElement.innerHTML = `
+                <div class="comment-header">
+                    <div class="comment-author">${name}</div>
+                    <div class="comment-date">${dateString}</div>
+                </div>
+                <div class="comment-content">${comment}</div>
+            `;
+           
+            // Add comment to the top of the comments list
+            const commentsList = document.getElementById('comments-list');
+            commentsList.insertBefore(commentElement, commentsList.firstChild);
+           
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.textContent = 'Your comment has been posted!';
+            successMessage.style.position = 'fixed';
+            successMessage.style.top = '20px';
+            successMessage.style.left = '50%';
+            successMessage.style.transform = 'translateX(-50%)';
+            successMessage.style.backgroundColor = '#4ECDC4';
+            successMessage.style.color = 'white';
+            successMessage.style.padding = '15px 30px';
+            successMessage.style.borderRadius = '30px';
+            successMessage.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            successMessage.style.zIndex = '1000';
+           
+            document.body.appendChild(successMessage);
+           
+            // Remove success message after 3 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 3000);
+           
+            // Reset form
+            this.reset();
+        });
+       
+        // Add scroll effect to header
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+           
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Scrolling up
+                header.style.transform = 'translateY(0)';
+            }
+           
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>
