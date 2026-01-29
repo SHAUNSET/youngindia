@@ -292,34 +292,22 @@
             border-radius: 2px;
         }
 
-        /* Posts Container - Responsive Layout */
-        .posts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+        /* Posts Slider Container */
+        .posts-slider-container {
+            position: relative;
             max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            overflow: hidden;
         }
 
-        /* On mobile/tablet - vertical layout */
-        @media (max-width: 1024px) {
-            .posts-container {
-                grid-template-columns: 1fr;
-                max-width: 600px;
-            }
-        }
-
-        /* On desktop/laptop - horizontal layout */
-        @media (min-width: 1025px) {
-            .posts-container {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 25px;
-            }
+        .posts-slider {
+            display: flex;
+            transition: transform 0.5s ease;
         }
 
         .post-card {
+            flex: 0 0 calc(33.333% - 20px);
+            margin: 0 10px;
             background-color: var(--light-card);
             border-radius: 15px;
             overflow: hidden;
@@ -420,6 +408,58 @@
 
         .read-more:hover {
             transform: translateX(5px);
+        }
+
+        /* Slider Controls */
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .slider-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .slider-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .slider-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 107, 107, 0.3);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
         }
 
         /* About Section */
@@ -659,6 +699,12 @@
         }
 
         /* Mobile Responsive Design */
+        @media (max-width: 1024px) {
+            .post-card {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: block;
@@ -718,6 +764,10 @@
 
             .section-title {
                 font-size: 1.8rem;
+            }
+
+            .post-card {
+                flex: 0 0 calc(100% - 20px);
             }
 
             .post-title {
@@ -879,57 +929,92 @@
     <section id="posts">
         <h2 class="section-title">Our Posts</h2>
        
-        <div class="posts-container">
-            <!-- Post 1: Latest Article -->
-            <div class="post-card">
-                <div class="post-image">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span class="post-category">Education</span>
-                </div>
-                <div class="post-content">
-                    <h3 class="post-title">Trained for Exams, Unprepared for Life</h3>
-                    <p class="post-excerpt">A critical examination of India's education system that trains students for exams rather than preparing them for real-life challenges. An exploration of the gap between academic knowledge and practical skills.</p>
-                    <div class="post-meta">
-                        <span>By Shaunak Naik</span>
-                        <span>Thursday, December 11, 2025</span>
+        <div class="posts-slider-container">
+            <div class="posts-slider" id="posts-slider">
+                <!-- Post 1: Latest Article -->
+                <div class="post-card">
+                    <div class="post-image">
+                        <i class="fas fa-random"></i>
+                        <span class="post-category">Mindset</span>
                     </div>
-                    <a href="article3.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    <div class="post-content">
+                        <h3 class="post-title">Choosing Everything, Doing Nothing</h3>
+                        <p class="post-excerpt">An exploration of choice overload in the modern world. How having too many options can lead to paralysis, and a shift in mindset from result-focused to process-focused living.</p>
+                        <div class="post-meta">
+                            <span>By Shaunak Naik</span>
+                            <span>Thursday, January 29, 2026</span>
+                        </div>
+                        <a href="article4.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Post 2: Previous Article -->
-            <div class="post-card">
-                <div class="post-image">
-                    <i class="fas fa-laptop-code"></i>
-                    <span class="post-category">Culture</span>
-                </div>
-                <div class="post-content">
-                    <h3 class="post-title">India's Borrowed Modernity</h3>
-                    <p class="post-excerpt">An exploration of how India adopted Western definitions of "modern" without consciously choosing them. A critical look at the invisible defaults shaping our identity, behavior, and perception of success.</p>
-                    <div class="post-meta">
-                        <span>By Shaunak Naik</span>
-                        <span>Wednesday, December 3, 2025</span>
+                <!-- Post 2: Previous Article -->
+                <div class="post-card">
+                    <div class="post-image">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span class="post-category">Education</span>
                     </div>
-                    <a href="article2.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    <div class="post-content">
+                        <h3 class="post-title">Trained for Exams, Unprepared for Life</h3>
+                        <p class="post-excerpt">A critical examination of India's education system that trains students for exams rather than preparing them for real-life challenges. An exploration of the gap between academic knowledge and practical skills.</p>
+                        <div class="post-meta">
+                            <span>By Shaunak Naik</span>
+                            <span>Thursday, December 11, 2025</span>
+                        </div>
+                        <a href="article3.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Post 3: Previous Article -->
-            <div class="post-card">
-                <div class="post-image">
-                    <i class="fas fa-pray"></i>
-                    <span class="post-category">Philosophy</span>
-                </div>
-                <div class="post-content">
-                    <h3 class="post-title">Man's Greatest Invention - Religion</h3>
-                    <p class="post-excerpt">Explore the origins of religion, its impact on human civilization, and how it has shaped societies throughout history. A narrative journey through faith, belief, and the human quest for meaning.</p>
-                    <div class="post-meta">
-                        <span>By Shaunak Naik</span>
-                        <span>Thursday, November 27, 2025</span>
+                <!-- Post 3: Previous Article -->
+                <div class="post-card">
+                    <div class="post-image">
+                        <i class="fas fa-laptop-code"></i>
+                        <span class="post-category">Culture</span>
                     </div>
-                    <a href="article1.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    <div class="post-content">
+                        <h3 class="post-title">India's Borrowed Modernity</h3>
+                        <p class="post-excerpt">An exploration of how India adopted Western definitions of "modern" without consciously choosing them. A critical look at the invisible defaults shaping our identity, behavior, and perception of success.</p>
+                        <div class="post-meta">
+                            <span>By Shaunak Naik</span>
+                            <span>Wednesday, December 3, 2025</span>
+                        </div>
+                        <a href="article2.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 4: Previous Article -->
+                <div class="post-card">
+                    <div class="post-image">
+                        <i class="fas fa-pray"></i>
+                        <span class="post-category">Philosophy</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">Man's Greatest Invention - Religion</h3>
+                        <p class="post-excerpt">Explore the origins of religion, its impact on human civilization, and how it has shaped societies throughout history. A narrative journey through faith, belief, and the human quest for meaning.</p>
+                        <div class="post-meta">
+                            <span>By Shaunak Naik</span>
+                            <span>Thursday, November 27, 2025</span>
+                        </div>
+                        <a href="article1.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="slider-controls">
+            <button class="slider-btn" id="prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn" id="next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Slider Dots -->
+        <div class="slider-dots" id="slider-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
         </div>
     </section>
 
@@ -1089,6 +1174,83 @@
             });
         });
        
+        // Posts Slider
+        const postsSlider = document.getElementById('posts-slider');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const dots = document.querySelectorAll('.dot');
+        
+        let currentSlide = 0;
+        let slidesPerView = 3;
+        let totalSlides = 4;
+        let maxSlide = totalSlides - slidesPerView;
+        
+        // Update slides per view based on screen size
+        function updateSlidesPerView() {
+            if (window.innerWidth <= 768) {
+                slidesPerView = 1;
+            } else if (window.innerWidth <= 1024) {
+                slidesPerView = 2;
+            } else {
+                slidesPerView = 3;
+            }
+            
+            maxSlide = totalSlides - slidesPerView;
+            updateSlider();
+            updateDots();
+        }
+        
+        // Initialize slides per view
+        updateSlidesPerView();
+        
+        // Update slider position
+        function updateSlider() {
+            const slideWidth = 100 / slidesPerView;
+            const translateX = -currentSlide * slideWidth;
+            postsSlider.style.transform = `translateX(${translateX}%)`;
+            
+            // Update button states
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === maxSlide;
+        }
+        
+        // Update dots
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Previous button click
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlider();
+                updateDots();
+            }
+        });
+        
+        // Next button click
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < maxSlide) {
+                currentSlide++;
+                updateSlider();
+                updateDots();
+            }
+        });
+        
+        // Dot click
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                currentSlide = parseInt(dot.getAttribute('data-slide'));
+                updateSlider();
+                updateDots();
+            });
+        });
+        
+        // Update slider on window resize
+        window.addEventListener('resize', updateSlidesPerView);
+        
         // Form Submission
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
