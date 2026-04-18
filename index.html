@@ -935,34 +935,34 @@
                 <!-- Post 1: Latest Article -->
                 <div class="post-card">
                     <div class="post-image">
-                        <i class="fas fa-pray"></i>
-                        <span class="post-category">Philosophy</span>
+                        <i class="fas fa-globe"></i>
+                        <span class="post-category">Conflict</span>
                     </div>
                     <div class="post-content">
-                        <h3 class="post-title">Man's Greatest Invention - Religion</h3>
-                        <p class="post-excerpt">Explore the origins of religion, its impact on human civilization, and how it has shaped societies throughout history. A narrative journey through faith, belief, and the human quest for meaning.</p>
+                        <h3 class="post-title">The Illusion of Victory</h3>
+                        <p class="post-excerpt">A critical examination of war's so-called victories, questioning whether true winners exist when cities are destroyed, families torn apart, and generations scarred. An exploration of the human cost of conflict and the illusion of triumph in the face of widespread devastation.</p>
                         <div class="post-meta">
                             <span>By Shaunak Naik</span>
-                            <span>Thursday, November 27, 2025</span>
+                            <span>Friday, April 19, 2026</span>
                         </div>
-                        <a href="article1.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="article5.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
                 <!-- Post 2: Previous Article -->
                 <div class="post-card">
                     <div class="post-image">
-                        <i class="fas fa-laptop-code"></i>
-                        <span class="post-category">Culture</span>
+                        <i class="fas fa-random"></i>
+                        <span class="post-category">Mindset</span>
                     </div>
                     <div class="post-content">
-                        <h3 class="post-title">India's Borrowed Modernity</h3>
-                        <p class="post-excerpt">An exploration of how India adopted Western definitions of "modern" without consciously choosing them. A critical look at the invisible defaults shaping our identity, behavior, and perception of success.</p>
+                        <h3 class="post-title">Choosing Everything, Doing Nothing</h3>
+                        <p class="post-excerpt">An exploration of choice overload in the modern world. How having too many options can lead to paralysis, and a shift in mindset from result-focused to process-focused living.</p>
                         <div class="post-meta">
                             <span>By Shaunak Naik</span>
-                            <span>Wednesday, December 3, 2025</span>
+                            <span>Thursday, January 29, 2026</span>
                         </div>
-                        <a href="article2.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="article4.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -986,34 +986,34 @@
                 <!-- Post 4: Previous Article -->
                 <div class="post-card">
                     <div class="post-image">
-                        <i class="fas fa-random"></i>
-                        <span class="post-category">Mindset</span>
+                        <i class="fas fa-laptop-code"></i>
+                        <span class="post-category">Culture</span>
                     </div>
                     <div class="post-content">
-                        <h3 class="post-title">Choosing Everything, Doing Nothing</h3>
-                        <p class="post-excerpt">An exploration of choice overload in the modern world. How having too many options can lead to paralysis, and a shift in mindset from result-focused to process-focused living.</p>
+                        <h3 class="post-title">India's Borrowed Modernity</h3>
+                        <p class="post-excerpt">An exploration of how India adopted Western definitions of "modern" without consciously choosing them. A critical look at the invisible defaults shaping our identity, behavior, and perception of success.</p>
                         <div class="post-meta">
                             <span>By Shaunak Naik</span>
-                            <span>Thursday, January 29, 2026</span>
+                            <span>Wednesday, December 3, 2025</span>
                         </div>
-                        <a href="article4.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="article2.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
                 <!-- Post 5: Previous Article -->
                 <div class="post-card">
                     <div class="post-image">
-                        <i class="fas fa-globe"></i>
-                        <span class="post-category">Conflict</span>
+                        <i class="fas fa-pray"></i>
+                        <span class="post-category">Philosophy</span>
                     </div>
                     <div class="post-content">
-                        <h3 class="post-title">The Illusion of Victory</h3>
-                        <p class="post-excerpt">A critical examination of war's so-called victories, questioning whether true winners exist when cities are destroyed, families torn apart, and generations scarred. An exploration of the human cost of conflict and the illusion of triumph in the face of widespread devastation.</p>
+                        <h3 class="post-title">Man's Greatest Invention - Religion</h3>
+                        <p class="post-excerpt">Explore the origins of religion, its impact on human civilization, and how it has shaped societies throughout history. A narrative journey through faith, belief, and the human quest for meaning.</p>
                         <div class="post-meta">
                             <span>By Shaunak Naik</span>
-                            <span>Friday, April 19, 2026</span>
+                            <span>Thursday, November 27, 2025</span>
                         </div>
-                        <a href="article5.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="article1.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -1200,7 +1200,7 @@
         
         let currentSlide = 0;
         let slidesPerView = 3;
-        let totalSlides = 4;
+        let totalSlides = document.querySelectorAll('.post-card').length;
         let maxSlide = totalSlides - slidesPerView;
         
         // Update slides per view based on screen size
