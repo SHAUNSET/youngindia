@@ -934,7 +934,41 @@
        
         <div class="posts-slider-container">
             <div class="posts-slider" id="posts-slider">
-                <!-- Post 1: Latest Article -->
+                <!-- Post 1: Latest Article (new) -->
+                <div class="post-card">
+                    <div class="post-image">
+                        <i class="fas fa-landmark"></i>
+                        <span class="post-category">Governance</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">Beyond Elections: What Should Governments Actually Deliver?</h3>
+                        <p class="post-excerpt">A long-form essay about what governments should prioritise beyond electoral politics — focusing on healthcare, education, employment and public infrastructure as measurable pillars of governance.</p>
+                        <div class="post-meta">
+                            <span>By Shaunak Naik</span>
+                            <span>Saturday, May 23, 2026</span>
+                        </div>
+                        <a href="article6.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 2: The Illusion of Victory (restored) -->
+                <div class="post-card">
+                    <div class="post-image">
+                        <i class="fas fa-globe"></i>
+                        <span class="post-category">Conflict</span>
+                    </div>
+                    <div class="post-content">
+                        <h3 class="post-title">The Illusion of Victory</h3>
+                        <p class="post-excerpt">A critical examination of war's so-called victories, questioning whether true winners exist when cities are destroyed, families torn apart, and generations scarred. An exploration of the human cost of conflict and the illusion of triumph in the face of widespread devastation.</p>
+                        <div class="post-meta">
+                            <span>By Shaunak Naik</span>
+                            <span>Sunday, April 19, 2026</span>
+                        </div>
+                        <a href="article5.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Post 2: Previous Article -->
                 <div class="post-card">
                     <div class="post-image">
                         <i class="fas fa-globe"></i>
@@ -1032,10 +1066,7 @@
         </div>
 
         <!-- Slider Dots -->
-        <div class="slider-dots" id="slider-dots">
-            <span class="dot active" data-slide="0"></span>
-            <span class="dot" data-slide="1"></span>
-        </div>
+        <div class="slider-dots" id="slider-dots"></div>
     </section>
 
 <!-- About Section -->
@@ -1198,12 +1229,29 @@
         const postsSlider = document.getElementById('posts-slider');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
-        const dots = document.querySelectorAll('.dot');
+        const dotsContainer = document.getElementById('slider-dots');
         
         let currentSlide = 0;
         let slidesPerView = 3;
         let totalSlides = document.querySelectorAll('.post-card').length;
         let maxSlide = totalSlides - slidesPerView;
+
+        // Render dots dynamically based on maxSlide
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            const count = Math.max(1, maxSlide + 1);
+            for (let i = 0; i < count; i++) {
+                const span = document.createElement('span');
+                span.className = 'dot' + (i === currentSlide ? ' active' : '');
+                span.dataset.slide = i;
+                span.addEventListener('click', () => {
+                    currentSlide = i;
+                    updateSlider();
+                    updateDots();
+                });
+                dotsContainer.appendChild(span);
+            }
+        }
         
         // Update slides per view based on screen size
         function updateSlidesPerView() {
@@ -1216,13 +1264,14 @@
             }
             
             maxSlide = totalSlides - slidesPerView;
+            if (currentSlide > maxSlide) currentSlide = Math.max(0, maxSlide);
             updateSlider();
-            updateDots();
+            renderDots();
         }
-        
+
         // Initialize slides per view
         updateSlidesPerView();
-        
+
         // Update slider position
         function updateSlider() {
             const slideWidth = 100 / slidesPerView;
@@ -1233,14 +1282,15 @@
             prevBtn.disabled = currentSlide === 0;
             nextBtn.disabled = currentSlide === maxSlide;
         }
-        
+
         // Update dots
         function updateDots() {
+            const dots = document.querySelectorAll('.dot');
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
             });
         }
-        
+
         // Previous button click
         prevBtn.addEventListener('click', () => {
             if (currentSlide > 0) {
@@ -1249,7 +1299,7 @@
                 updateDots();
             }
         });
-        
+
         // Next button click
         nextBtn.addEventListener('click', () => {
             if (currentSlide < maxSlide) {
@@ -1257,15 +1307,6 @@
                 updateSlider();
                 updateDots();
             }
-        });
-        
-        // Dot click
-        dots.forEach(dot => {
-            dot.addEventListener('click', () => {
-                currentSlide = parseInt(dot.getAttribute('data-slide'));
-                updateSlider();
-                updateDots();
-            });
         });
         
         // Update slider on window resize
